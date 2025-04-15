@@ -27,8 +27,8 @@ include('header.php');
 		<img src="admin/images/chmsc.png" width="60" height="60">
  	</a>
 	<a class="brand">
-	 <h2>CHMSC Laboratory School Voting System</h2>
-	 <div class="chmsc_nav"><font size="4" color="white">Carlos Hilado Memorial State College</font></div>
+	 <h2>Pimpri Chinchwad Education Trust</h2>
+	 <div class="chmsc_nav"><font size="4" color="white">Pimpri Chinchwad COllege of Engineering, Pune</font></div>
  	</a>
 
 	<?php include('head.php'); ?>

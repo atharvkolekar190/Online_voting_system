@@ -19,7 +19,7 @@ include('dbcon.php');
 	  <li class="active"><a  href="voter_list.php"><i class="icon-align-justify icon-large"></i>Voters List</a></li>  
 		 <li><a  href="canvassing_report.php"><i class="icon-book icon-large"></i>Canvassing Report</a></li>
 		    <li><a  href="History.php"><i class="icon-table icon-large"></i>History Log</a>
-		   <li><a data-toggle="modal" href="#about"><i class="icon-exclamation-sign icon-large"></i>About</a></li>
+		   <!-- <li><a data-toggle="modal" href="#about"><i class="icon-exclamation-sign icon-large"></i>About</a></li> -->
 		   <div class="modal hide fade" id="about">
 	<div class="modal-header"> 
 	<button type="button" class="close" data-dismiss="modal">�</button>

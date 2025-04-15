@@ -117,13 +117,15 @@ Candidate for 1st Year Representative</font>
 $representative=mysqli_query($conn,"select * from candidate where Position='1st Year Representative'")or die(mysqli_error());
 while($row=mysqli_fetch_array($representative)){ $representative_id=$row['CandidateID']; ?>
 
-<img class="gov" src="<?php echo $row['Photo'];?>" width="70" height="70" border="0" onmouseover="showtrail('<?php echo $row['Photo'];?>','<?php echo $row['FirstName']." ".$row['LastName'];?> ',200,5)" onmouseout="hidetrail()">
+<img class="gov" src="<?php echo $row['Photo'];?>" width="100" height="130" border="1" onmouseover="showtrail('<?php echo $row['Photo'];?>','<?php echo $row['FirstName']." ".$row['LastName'];?> ',200,5)" onmouseout="hidetrail()">
+
 &nbsp;&nbsp;&nbsp;&nbsp;
 
 <?php
 }
 ?>
 </div>
+<br>
 </div>
 <div class="select_rep">
 <div class="margin-gov">

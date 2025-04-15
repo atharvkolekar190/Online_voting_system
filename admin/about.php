@@ -1,7 +1,7 @@
 <h1><font color="gray">Online Voting System</font></h1>
 </br>
 <font color="#555">
-<p>For Carlos Hilado Memorial State college Laboratory School</p>
+<p>Pimpri Chinchwad Collge of Engineering, Pune</p>
 <p>Develop By:</p>
 </font>
 </br>

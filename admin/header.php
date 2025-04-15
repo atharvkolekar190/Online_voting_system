@@ -89,7 +89,7 @@ $('.dropdown-toggle').dropdown()
 <link href="js/qtip/jquery.qtip.min.css" rel="stylesheet" type="text/css" media="screen, projection">
 		
 <script type="text/javascript" language="JavaScript">
-<!-- Copyright 2002 Bontrager Connection, LLC
+<!-- Copyright 2025 , LLC
 
 function getCalendarDate()
 {
