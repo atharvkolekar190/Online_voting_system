@@ -5,8 +5,34 @@ include('header.php');
 ?>
 <link rel="stylesheet" type="text/css" href="admin/css/style.css" />
 <script src="jquery.iphone-switch.js" type="text/javascript"></script>
-</head>
 
+<!-- 👇 ADD CUSTOM IMAGE STYLING -->
+<style>
+    .candidate-photo {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border: 2px solid #fff;
+        border-radius: 8px;
+        margin: 10px;
+        transition: transform 0.2s ease;
+    }
+
+    .candidate-photo:hover {
+        transform: scale(1.05);
+        border-color: #00ccff;
+    }
+
+    .image-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 15px;
+    }
+</style>
+
+</head>
 <body>
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
@@ -17,234 +43,176 @@ include('header.php');
 				<a class="brand">
 					<h2>Pimpri Chinchwad Education Trust</h2>
 					<div class="chmsc_nav">
-						<font size="4" color="white">Pimpri Chinchwad College of Engineering,Pune</font>
+						<font size="4" color="white">Pimpri Chinchwad College of Engineering, Pune</font>
 					</div>
 				</a>
-
 				<?php include('head.php'); ?>
-
 			</div>
 		</div>
 	</div>
-	<div class="wrapper">
 
+	<div class="wrapper">
 		<div class="hero-body-voting">
 			<div class="vote_wise">
 				<font color="white" size="6">"Please Vote Wisely"</font>
 			</div>
-			<div class="help">
-				<!-- <a class="btn btn-info" id="help" href="help2.php"><i class="icon-info-sign icon-large"></i>&nbsp;Help</a> -->
-			</div>
 		</div>
+
 		<form method="post" action="vote2.php">
+			<!-- Governor Section -->
 			<div class="gov-align">
 				<div class="hero-body-candidate_gov">
 					<font color="white">Candidate for Governor</font>
 				</div>
-				<div class="governor">
-					<div class="gov-margin">
-						<?php
-						$governor = mysqli_query($conn, "select * from candidate where Position='Governor'") or die(mysqli_error());
-						while ($row = mysqli_fetch_array($governor)) {
-							$governor_id = $row['CandidateID']; ?>
-
-							<img class="gov" src="<?php echo $row['Photo']; ?>" width="100" height="130" border="1"
-								onmouseover="showtrail('<?php echo $row['Photo']; ?>','<?php echo $row['FirstName'] . " " . $row['LastName']; ?> ',200,5)"
-								onmouseout="hidetrail()">
-							&nbsp;&nbsp;&nbsp;&nbsp;
-
-
-
-							<?php
-						}
-						?>
-					</div>
-					<br>
+				<div class="image-grid">
+					<?php
+					$governor = mysqli_query($conn, "SELECT * FROM candidate WHERE Position='Governor'") or die(mysqli_error());
+					while ($row = mysqli_fetch_array($governor)) {
+						$governor_id = $row['CandidateID'];
+					?>
+						<img class="candidate-photo" src="<?php echo $row['Photo']; ?>" 
+							onmouseover="showtrail('<?php echo $row['Photo']; ?>','<?php echo $row['FirstName'] . " " . $row['LastName']; ?> ',200,5)" 
+							onmouseout="hidetrail()">
+					<?php } ?>
 				</div>
+
 				<div class="select_gov">
 					<div class="margin-gov">
 						<select name="governor" class="span222">
 							<option class="option">--Select Candidate--</option>
 							<?php
-							$governor = mysqli_query($conn, "select * from candidate where Position='Governor'") or die(mysqli_error());
+							$governor = mysqli_query($conn, "SELECT * FROM candidate WHERE Position='Governor'") or die(mysqli_error());
 							while ($row = mysqli_fetch_array($governor)) {
-								$governor_id = $row['CandidateID']; ?>
-								<option value="<?php echo $governor_id; ?>" class="option">
-									<?php echo $row['FirstName'] . " " . $row['LastName']; ?></option>
-							<?php } ?>
+								echo '<option value="' . $row['CandidateID'] . '">' . $row['FirstName'] . " " . $row['LastName'] . '</option>';
+							}
+							?>
 						</select>
 					</div>
 				</div>
 			</div>
 
-
-
+			<!-- Vice-Governor Section -->
 			<div class="vice-align">
 				<div class="hero-body-candidate1">
 					<font color="white">Candidate for Vice-Governor</font>
 				</div>
-
-				<div class="governor">
-					<div class="gov-margin">
-						<?php
-						$vice = mysqli_query($conn, "select * from candidate where Position='Vice-Governor'") or die(mysqli_error());
-						while ($row = mysqli_fetch_array($vice)) {
-							$vice_id = $row['CandidateID']; ?>
-
-							<img class="gov" src="<?php echo $row['Photo']; ?>" width="150" height="150" border="0"
-								onmouseover="showtrail('<?php echo $row['Photo']; ?>','<?php echo $row['FirstName'] . " " . $row['LastName']; ?> ',200,5)"
-								onmouseout="hidetrail()">
-							&nbsp;&nbsp;&nbsp;&nbsp;
-
-							<?php
-						}
-						?>
-					</div>
+				<div class="image-grid">
+					<?php
+					$vice = mysqli_query($conn, "SELECT * FROM candidate WHERE Position='Vice-Governor'") or die(mysqli_error());
+					while ($row = mysqli_fetch_array($vice)) {
+					?>
+						<img class="candidate-photo" src="<?php echo $row['Photo']; ?>" 
+							onmouseover="showtrail('<?php echo $row['Photo']; ?>','<?php echo $row['FirstName'] . " " . $row['LastName']; ?> ',200,5)" 
+							onmouseout="hidetrail()">
+					<?php } ?>
 				</div>
 				<div class="select_gov">
 					<div class="margin-gov">
 						<select name="vice" class="span222">
 							<option class="option">--Select Candidate--</option>
 							<?php
-							$vice = mysqli_query($conn, "select * from candidate where Position='Vice-Governor'") or die(mysqli_error());
+							$vice = mysqli_query($conn, "SELECT * FROM candidate WHERE Position='Vice-Governor'") or die(mysqli_error());
 							while ($row = mysqli_fetch_array($vice)) {
-								$vice_id = $row['CandidateID']; ?>
-								<option value="<?php echo $vice_id; ?>" class="option">
-									<?php echo $row['FirstName'] . " " . $row['LastName']; ?></option>
-							<?php } ?>
+								echo '<option value="' . $row['CandidateID'] . '">' . $row['FirstName'] . " " . $row['LastName'] . '</option>';
+							}
+							?>
 						</select>
 					</div>
 				</div>
 			</div>
 
-
-
-
+			<!-- 2nd Year Representative Section -->
 			<div class="rep-align">
 				<div class="hero-body-rep">
-					<font color="white">&nbsp;&nbsp;
-						&nbsp;
-						Candidate for 2nd Year Representative</font>
+					<font color="white">&nbsp;&nbsp;Candidate for 2nd Year Representative</font>
 				</div>
-
-				<div class="represent">
-					<div class="margin-represent">
-
-						<?php
-						$representative = mysqli_query($conn, "select * from candidate where Position='2nd Year Representative' order by FirstName Asc") or die(mysqli_error());
-						while ($row = mysqli_fetch_array($representative)) {
-							$representative_id = $row['CandidateID']; ?>
-
-							<img class="gov" src="<?php echo $row['Photo']; ?>" width="70" height="70" border="0"
-								onmouseover="showtrail('<?php echo $row['Photo']; ?>','<?php echo $row['FirstName'] . " " . $row['LastName']; ?> ',200,5)"
-								onmouseout="hidetrail()">
-							&nbsp;&nbsp;&nbsp;&nbsp;
-
-							<?php
-						}
-						?>
-					</div>
+				<div class="image-grid">
+					<?php
+					$rep = mysqli_query($conn, "SELECT * FROM candidate WHERE Position='2nd Year Representative' ORDER BY FirstName ASC") or die(mysqli_error());
+					while ($row = mysqli_fetch_array($rep)) {
+					?>
+						<img class="candidate-photo" src="<?php echo $row['Photo']; ?>" 
+							onmouseover="showtrail('<?php echo $row['Photo']; ?>','<?php echo $row['FirstName'] . " " . $row['LastName']; ?> ',200,5)" 
+							onmouseout="hidetrail()">
+					<?php } ?>
 				</div>
 				<div class="select_rep">
 					<div class="margin-gov">
-
 						<div class="span44">
 							<select name="representative1" class="span222">
 								<option class="option1">--Select Candidate--</option>
-
 								<?php
-								$representative = mysqli_query($conn, "select * from candidate where Position='2nd Year Representative' order by FirstName Asc") or die(mysqli_error());
-								while ($row = mysqli_fetch_array($representative)) {
-									$representative_id = $row['CandidateID']; ?>
-									<option value="<?php echo $representative_id; ?>" class="option1">
-										<?php echo $row['FirstName'] . " " . $row['LastName']; ?></option>
-								<?php } ?>
+								$rep = mysqli_query($conn, "SELECT * FROM candidate WHERE Position='2nd Year Representative' ORDER BY FirstName ASC") or die(mysqli_error());
+								while ($row = mysqli_fetch_array($rep)) {
+									echo '<option value="' . $row['CandidateID'] . '">' . $row['FirstName'] . " " . $row['LastName'] . '</option>';
+								}
+								?>
 							</select>
 						</div>
-
-
 						<div class="span44">
 							<select name="representative2" class="span222">
 								<option class="option1">--Select Candidate--</option>
 								<?php
-								$representative = mysqli_query($conn, "select * from candidate where Position='2nd Year Representative' order by FirstName Asc") or die(mysqli_error());
-								while ($row = mysqli_fetch_array($representative)) {
-									$representative_id = $row['CandidateID']; ?>
-									<option value="<?php echo $representative_id; ?>" class="option1">
-										<?php echo $row['FirstName'] . " " . $row['LastName']; ?></option>
-								<?php } ?>
+								$rep = mysqli_query($conn, "SELECT * FROM candidate WHERE Position='2nd Year Representative' ORDER BY FirstName ASC") or die(mysqli_error());
+								while ($row = mysqli_fetch_array($rep)) {
+									echo '<option value="' . $row['CandidateID'] . '">' . $row['FirstName'] . " " . $row['LastName'] . '</option>';
+								}
+								?>
 							</select>
 						</div>
-
-
 						<div class="span44">
 							<select name="representative3" class="span222">
 								<option class="option1">--Select Candidate--</option>
 								<?php
-								$representative = mysqli_query($conn, "select * from candidate where Position='2nd Year Representative' order by FirstName Asc") or die(mysqli_error());
-								while ($row = mysqli_fetch_array($representative)) {
-									$representative_id = $row['CandidateID']; ?>
-									<option value="<?php echo $representative_id; ?>" class="option1">
-										<?php echo $row['FirstName'] . " " . $row['LastName']; ?></option>
-								<?php } ?>
+								$rep = mysqli_query($conn, "SELECT * FROM candidate WHERE Position='2nd Year Representative' ORDER BY FirstName ASC") or die(mysqli_error());
+								while ($row = mysqli_fetch_array($rep)) {
+									echo '<option value="' . $row['CandidateID'] . '">' . $row['FirstName'] . " " . $row['LastName'] . '</option>';
+								}
+								?>
 							</select>
 						</div>
-
-
 					</div>
 				</div>
-
-
 			</div>
 
-
-
+			<!-- Submit Vote Buttons -->
 			<div class="thumbnail_widget">
-
 				<div class="submit-vote">
-
-					<button id="save_voter" id="vote" class="btn btn-success" name="save"><i
-							class="icon-thumbs-up icon-large"></i>&nbsp;Submit Vote</button>
+					<button id="save_voter" class="btn btn-success" name="save">
+						<i class="icon-thumbs-up icon-large"></i>&nbsp;Submit Vote
+					</button>
 				</div>
 			</div>
-
 			<div class="thumbnail_widget1">
-
 				<div class="submit-vote">
-
-					<a class="btn" id="index" data-toggle="modal" href="#myModal"><i
-							class="icon-circle-arrow-left icon-large"></i>&nbsp;Vote later</a>
+					<a class="btn" id="index" data-toggle="modal" href="#myModal">
+						<i class="icon-circle-arrow-left icon-large"></i>&nbsp;Vote later
+					</a>
 				</div>
 			</div>
-
-
-
-
-
-
 		</form>
-		</br>
 
+		<br>
 		<div class="foot">
 			<?php include('footer1.php') ?>
 		</div>
 	</div>
 
+	<!-- Vote Later Modal -->
+	<div class="modal hide fade" id="myModal">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">×</button>
+			<h3> </h3>
+		</div>
+		<div class="modal-body">
+			<p>
+				<font color="gray">Are You Sure you Want to Vote Later?</font>
+			</p>
+		</div>
+		<div class="modal-footer">
+			<a href="#" class="btn" data-dismiss="modal">No</a>
+			<a href="logout_back.php" class="btn btn-primary">Yes</a>
+		</div>
+	</div>
 </body>
-
 </html>
-<div class="modal hide fade" id="myModal">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">�</button>
-		<h3> </h3>
-	</div>
-	<div class="modal-body">
-		<p>
-			<font color="gray">Are You Sure you Want to Vote Later?</font>
-		</p>
-	</div>
-	<div class="modal-footer">
-		<a href="#" class="btn" data-dismiss="modal">No</a>
-		<a href="logout_back.php" class="btn btn-primary">Yes</a>
-	</div>
-</div>
